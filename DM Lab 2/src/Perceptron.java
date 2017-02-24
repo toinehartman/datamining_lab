@@ -42,23 +42,29 @@ public class Perceptron {
 			for (int i = 0; i < fv.size(); i++)
 				weights.add(0.0);
 		}
-		//System.out.println("fv= "+fv);
-	//	System.out.println("w = "+weights);
+		
+				
+		// First calculate y' = W*X
 		double yAccent = fv.product(weights);
-	//	System.out.println("w*x = "+yAccent);
+
+		// Now, if y' (new label) and y (current label) have a different sign or y' = 0, do:
+		
 		if ((fv.getLabel() <= 0.0 && yAccent > 0.0) || yAccent == 0.0){
-			fv.label = 1;
+			fv.label = 1; //change the label
+			
+			//W <- W + (n*y')*X
 			for(int i = 0; i < weights.size(); i++){
 				double w = weights.remove(i);
 				weights.add(i, w+(learningRate*fv.getLabel()*fv.get(i))); //update weight
-	//			System.out.println("delta = "+learningRate*fv.getLabel()*fv.get(i));
 			}
+			
 		} else if ((fv.getLabel() > 0.0 && yAccent < 0.0) || yAccent == 0.0) {
 			fv.label = -1;
+
+			//W <- W + (n*y')*X
 			for(int i = 0; i < weights.size(); i++){
 				double w = weights.remove(i);
 				weights.add(i, w+(learningRate*fv.getLabel()*fv.get(i))); //update weight
-	//			System.out.println("delta = "+learningRate*fv.getLabel()*fv.get(i));
 			}
 		}
 		

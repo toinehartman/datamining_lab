@@ -36,6 +36,7 @@ public class FeatureVector extends ArrayList<Double> {
 
 		double result = 0.0;
 		
+		//Inproduct = x1*y1 + x2*y2 + x3*y3 + ... + xd*yd
 		for(int i = 0; i < this.size(); i++)
 			result += this.get(i) * weights.get(i); 
 
@@ -52,6 +53,7 @@ public class FeatureVector extends ArrayList<Double> {
 
 		double result = 0.0;
 		
+		//d(X,Y) = SQRT( (x1-y1)^2 + (x2-y2)^2 + (x3-y3)^2 + ... + (xd-yd)^2 )		
 		for(int i = 0; i < this.size(); i++)
 			result += Math.pow( (this.get(i) - vector.get(i)), 2); 
 
