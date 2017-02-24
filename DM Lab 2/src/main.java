@@ -47,10 +47,22 @@ public class main {
 	}
 
 	public static void nearestNeighbour() {
-		// add code here
+		//TODO: implement the nearestNeighbour method. This method should create
+		// a NearestNeighbour and NearestNeighbourPlotter object with k set to 3. Let
+		// the NearestNeighbour object read in the data from the file "data/banana.txt". Let the
+		// NearestNeighbourPlotter plot the data of the NearestNeighbour classifier.
+		
+		//Note: You can click on the scatterplot to add points. These points will then be classified and shown
+		//on screen. Added points will not contribute to further classifications.
+		
+		//Add code here
 	}
 	
 	public static void nearestNeighbourDigits() {
+		//TODO: implement the nearestNeighbourDigits method. This method
+		// trains a nearest neighbour classifier on the same dataset of digits as before with the perceptron.
+		// Again, calculate the error rate on the test set and compare the results.
+		
 		// add code here
 	}
 

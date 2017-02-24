@@ -54,6 +54,7 @@ public class NearestNeighbour {
 		
 		
 		//TODO: Sort them by distance, smallest distance first.
+		//Use a list of Measurement objects, it can easily be sorted using Collections.sort
 		
 		//TODO: Select k of the nearest objects
 		
