@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -47,20 +48,47 @@ public class NearestNeighbour {
 		
 		System.out.println("fv = "+features + ", k = "+ k);
 		
-		//TODO: Calculate the distance of the object to each element in the dataset.
+		//Calculate the distance of the object to each element in the dataset.
 		FeatureVector fv = (FeatureVector) features;
-		double distance = 1;
-		Measurement m = new Measurement(fv,distance);
+		List<Measurement> measurements = new ArrayList<>();
 		
+		//	iterate through the featureVectors in the dataset to calculate each distance to fv
+		Iterator<FeatureVector> iter = dataset.iterator();
+		while(iter.hasNext()){
+			FeatureVector elem = iter.next();
+			double distance = fv.distance(elem);
+			Measurement m = new Measurement(elem,distance);
+			measurements.add(m);
+			
+		}
 		
-		//TODO: Sort them by distance, smallest distance first.
+		//Sort them by distance, smallest distance first.
 		//Use a list of Measurement objects, it can easily be sorted using Collections.sort
 		
-		//TODO: Select k of the nearest objects
+		Collections.sort(measurements);
 		
-		//TODO: Calculate which label has the highest majority vote
+		//Select k of the nearest objects
+		
+		for(int i = k; i < measurements.size(); i++)
+			measurements.remove(i);
+		
+		//Calculate which label has the highest majority voted
+		
+		int teamPositive = 0;
+		int teamNegative = 0;
+		
+		for(Measurement m : measurements){
+			if(m.getFeatureVector().getLabel() == 1)
+				teamPositive++;
+			else{
+				teamNegative++;
+			}
+		}
 		
 		//TODO: Assign the label to that class
+		if(teamPositive > teamNegative)
+			label = 1;
+		
 		return label;
 	}
 }

@@ -46,4 +46,30 @@ public class ClassificationTest {
 		assertEquals(answer,pc.weights);
 	}
 	
+	
+	@Test
+	public void testNearestNeighbour() {
+		NearestNeighbour nn = new NearestNeighbour();
+		Dataset ds = new Dataset();
+
+		//Construct a featureVector without a label
+		FeatureVector predFV = new FeatureVector(0);
+		predFV.add(1.0);predFV.add(2.0);
+		
+		//Construct a simple dataset
+		FeatureVector fV1 = new FeatureVector(0);
+		fV1.add(1.0);fV1.add(2.0);fV1.label = 1;
+		FeatureVector fV2 = new FeatureVector(0);
+		fV2.add(3.0);fV2.add(5.0);fV2.label = -1*fV1.label;
+		FeatureVector fV3 = new FeatureVector(0);
+		fV3.add(2.0);fV3.add(0.0);fV3.label = fV1.label;
+		
+		ds.add(fV1);ds.add(fV2);ds.add(fV3);
+		nn.dataset = ds;
+		int k = ds.size();
+			
+		assertEquals(fV1.getLabel(), nn.predict(predFV, k));
+	}
+	
 }
+
