@@ -8,7 +8,7 @@ public class main {
 		PerceptronPlotter pcp = new PerceptronPlotter("1","2");
 		Dataset ds = new Dataset();
 		
-		ds.readData("data/gaussian.txt", true);
+		ds.readData("Lab 2/data/gaussian.txt", true);
 		
 		pc.updateWeights(ds);
 		pcp.plotData(ds, pc);
@@ -18,7 +18,7 @@ public class main {
 	public static void perceptronDigits() {
 		Perceptron pc = new Perceptron(1);
 		Dataset ds = new Dataset();
-		ds.readData("data/train_digits.txt", true);
+		ds.readData("Lab 2/data/train_digits.txt", true);
 		
 		for(int i = 1; i <= 2; i++){
 			new DigitFrame("Row "+i,ds.get(i),8,8);
@@ -29,7 +29,7 @@ public class main {
 		//new DigitFrame("weights",pc.weights,8,8);
 		
 		Dataset ds2 = new Dataset();
-		ds2.readData("data/test_digits.txt", true);
+		ds2.readData("Lab 2/data/test_digits.txt", true);
 		
 		int misclassified = 0;
 		
