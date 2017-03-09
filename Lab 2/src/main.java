@@ -71,13 +71,29 @@ public class main {
 		// Again, calculate the error rate on the test set and compare the results.
 		
 		// add code here
+		NearestNeighbour nn = new NearestNeighbour();
+		nn.readData("data/train_digits.txt");
+
+		Dataset ds_test = new Dataset("data/test_digits.txt", false);
+		int misclassified = 0;
+
+		for (FeatureVector fv : ds_test) {
+			int actual = fv.getLabel();
+			int prediction = nn.predict(fv, 3);
+
+			if (actual != prediction)
+				misclassified++;
+		}
+
+		double error_rate = (double) misclassified / ds_test.size();
+		System.out.println(String.format("Error rate (digits using nn): %f", error_rate));
 	}
 
 	public static void main(String[] args) {
-		//perceptron();
+//		perceptron();
 //		perceptronDigits();
-		nearestNeighbour();
-		//nearestNeighbourDigits();
+//		nearestNeighbour();
+		nearestNeighbourDigits();
 	}
 
 }
