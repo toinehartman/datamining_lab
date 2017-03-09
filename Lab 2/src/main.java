@@ -20,30 +20,31 @@ public class main {
 		Dataset ds = new Dataset();
 		ds.readData("data/train_digits.txt", true);
 		
-		for(int i = 1; i <= 2; i++){
-			new DigitFrame("Row "+i,ds.get(i),8,8);
-		}
+//		for(int i = 49; i <= 54; i++){
+//			new DigitFrame("Row " + i, ds.get(i),8,8);
+//		}
+
 		pc.updateWeights(ds);
 		pc.updateWeights(ds);
-		
-		//new DigitFrame("weights",pc.weights,8,8);
-		
+
+//		new DigitFrame("weights", pc.weights, 8, 8);
+
 		Dataset ds2 = new Dataset();
 		ds2.readData("data/test_digits.txt", true);
-		
+
 		int misclassified = 0;
-		
+
 		Iterator<FeatureVector> iter = ds2.iterator();
 		while(iter.hasNext()){
 			FeatureVector fv = iter.next();
 			if(pc.predict(fv) != fv.getLabel()){
 				misclassified++;
-				new DigitFrame("",fv,8,8);
+//				new DigitFrame("Misclassified",fv,8,8);
 			}
 		}
-		
+
 		double errorRate = (double) misclassified / ds2.size();
-		System.out.println("Error rate = "+errorRate);
+		System.out.println("Error rate = " + errorRate);
 	}
 
 	public static void nearestNeighbour() {
@@ -56,6 +57,12 @@ public class main {
 		//on screen. Added points will not contribute to further classifications.
 		
 		//Add code here
+		NearestNeighbour nn = new NearestNeighbour();
+		NearestNeighbourPlotter nnp = new NearestNeighbourPlotter(3);
+
+		nn.readData("data/banana.txt");
+		nnp.plotData(nn);
+
 	}
 	
 	public static void nearestNeighbourDigits() {
@@ -68,8 +75,8 @@ public class main {
 
 	public static void main(String[] args) {
 		//perceptron();
-		perceptronDigits();
-		//nearestNeighbour();
+//		perceptronDigits();
+		nearestNeighbour();
 		//nearestNeighbourDigits();
 	}
 

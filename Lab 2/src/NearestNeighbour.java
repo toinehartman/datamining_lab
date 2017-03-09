@@ -46,33 +46,32 @@ public class NearestNeighbour {
 		// the result
 		int label = -1;
 		
-		System.out.println("fv = "+features + ", k = "+ k);
+		System.out.println("fv = " + features + ", k = "+ k);
 		
-		//Calculate the distance of the object to each element in the dataset.
-		FeatureVector fv = (FeatureVector) features;
+		// Calculate the distance of the object to each element in the dataset.
+		FeatureVector fv = (FeatureVector)features;
 		List<Measurement> measurements = new ArrayList<>();
 		
-		//	iterate through the featureVectors in the dataset to calculate each distance to fv
+		// Iterate through the featureVectors in the dataset to calculate each distance to fv
 		Iterator<FeatureVector> iter = dataset.iterator();
 		while(iter.hasNext()){
 			FeatureVector elem = iter.next();
 			double distance = fv.distance(elem);
-			Measurement m = new Measurement(elem,distance);
+			Measurement m = new Measurement(elem, distance);
 			measurements.add(m);
-			
 		}
 		
-		//Sort them by distance, smallest distance first.
-		//Use a list of Measurement objects, it can easily be sorted using Collections.sort
+		// Sort them by distance, smallest distance first.
+		// Use a list of Measurement objects, it can easily be sorted using Collections.sort
 		
 		Collections.sort(measurements);
 		
-		//Select k of the nearest objects
+		// Select k of the nearest objects
 		
 		for(int i = k; i < measurements.size(); i++)
 			measurements.remove(i);
 		
-		//Calculate which label has the highest majority voted
+		// Calculate which label has the highest majority vote
 		
 		int teamPositive = 0;
 		int teamNegative = 0;
