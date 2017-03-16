@@ -70,7 +70,24 @@ public class PageRank {
 		// the resulting matrix
 		Matrix transitionMatrix = new Matrix(data.size(), data.size());
         
-        // FILL IN YOUR CODE HERE
+		int i = 0; 
+        //For each node in the dataset, find the outgoing nodes, calculate the value and set the right cell in the transitionMatrix.
+		for(String nodeId : data.keySet()){
+        	LinkedHashMap<String, Integer> node = data.get(nodeId);
+        	int j = 0;
+        	//Calculate the sum of all edges
+        	double sum = 0.0;
+        	for(String outgoing: node.keySet())
+        		sum += node.get(outgoing);
+        	//for all outgoing nodes: set the weighted value
+        	for(String outgoing: node.keySet()){
+        		//int N = node.size();
+        		double value = node.get(outgoing)/sum ;
+        		transitionMatrix.set(j, i, value);
+        		j++;
+        	}
+        	i++;
+        }
 
 		return transitionMatrix;
 	}
@@ -80,8 +97,10 @@ public class PageRank {
 	 */
 	public Matrix getRandomSurferVector() {
 		Matrix result = new Matrix(data.size(), 1);
-
-        // FILL IN YOUR CODE HERE
+        double N = data.size();
+        System.out.println(N);
+        for(int i = 0; i < N; i++)
+        	result.set(i, 0, 1/N);
 
 		return result;
 	}
@@ -98,10 +117,12 @@ public class PageRank {
 		HashMap<String, Double> result = new HashMap<String, Double>();
 
 		// the tools
-		Matrix transitionMatrix = null;
-		Matrix randomSurfer = null;
-
-        // FILL IN YOUR CODE HERE
+		Matrix transitionMatrix = constructTransitionMatrix();
+		Matrix randomSurfer = getRandomSurferVector();
+		
+		//Iterative step:
+        for(int i = 0; i < iterations ; i++)
+        	randomSurfer = transitionMatrix.dot(randomSurfer);
 
 		// fill the results, match names with PageRank values
 		int count = 0;

@@ -38,7 +38,13 @@ public class Matrix extends ArrayList<Double> {
 	 * @param value The value to set at (r, c).
 	 */
 	public void set(int r, int c, double value) {
-		set((rows*c) + r, value);
+		if(cols == 1){
+			set(r, value);
+		} else if (rows == 1) {
+			set(r, value);
+		} else {
+			set((rows*c) + r, value);
+		}
 	}
 
 	/**

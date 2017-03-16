@@ -11,7 +11,10 @@ public class main {
 
 	public static void main(String[] args) {
 
-        // FILL IN YOUR CODE HERE
+        PageRank pageRank = new PageRank();
+        pageRank.importData("data/example.txt");
+                
+        System.out.println(pageRank.calculatePageRank(10));
 
 	}
 
