@@ -98,7 +98,6 @@ public class PageRank {
 	public Matrix getRandomSurferVector() {
 		Matrix result = new Matrix(data.size(), 1);
         double N = data.size();
-        System.out.println(N);
         for(int i = 0; i < N; i++)
         	result.set(i, 0, 1/N);
 

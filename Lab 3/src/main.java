@@ -10,12 +10,15 @@ import java.util.Map.Entry;
 public class main {
 
 	public static void main(String[] args) {
-
         PageRank pageRank = new PageRank();
         pageRank.importData("data/example.txt");
                 
         System.out.println(pageRank.calculatePageRank(10));
 
+		PageRank pageRank2 = new PageRank();
+		pageRank2.importData("data/example2.txt");
+
+		System.out.println(pageRank2.calculatePageRank(10));
 	}
 
 	/*
