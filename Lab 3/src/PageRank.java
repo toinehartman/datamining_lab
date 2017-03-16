@@ -112,6 +112,12 @@ public class PageRank {
 	 * @return A map with names and PageRank values.
 	 */
 	public Map<String, Double> calculatePageRank(int iterations) {
+		double beta = 0.8;
+		int n = data.size();
+		Matrix e = new Matrix(n, 1);
+		for (int i = 0; i < n; i++)
+			e.set(i, 1.0);
+
 		// the result
 		HashMap<String, Double> result = new HashMap<String, Double>();
 
@@ -121,7 +127,10 @@ public class PageRank {
 		
 		//Iterative step:
         for(int i = 0; i < iterations ; i++)
-        	randomSurfer = transitionMatrix.dot(randomSurfer);
+        	randomSurfer = transitionMatrix
+					.multiply(beta)
+					.dot(randomSurfer)
+					.add(e.multiply((1 - beta) / n));
 
 		// fill the results, match names with PageRank values
 		int count = 0;
