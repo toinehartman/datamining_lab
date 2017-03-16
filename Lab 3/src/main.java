@@ -12,13 +12,15 @@ public class main {
 	public static void main(String[] args) {
         PageRank pageRank = new PageRank();
         pageRank.importData("data/example.txt");
-                
         System.out.println(pageRank.calculatePageRank(10));
 
 		PageRank pageRank2 = new PageRank();
 		pageRank2.importData("data/example2.txt");
-
 		System.out.println(pageRank2.calculatePageRank(10));
+
+		PageRank flightRank = new PageRank();
+		flightRank.importData("data/flight_data.txt");
+		System.out.println(sortByValues(flightRank.calculatePageRank(10)));
 	}
 
 	/*
@@ -30,7 +32,6 @@ public class main {
 		List<Map.Entry<K,V>> entries = new LinkedList<Map.Entry<K,V>>(map.entrySet());
 
 		Collections.sort(entries, new Comparator<Map.Entry<K,V>>() {
-
 			@Override
 			public int compare(Entry<K, V> o1, Entry<K, V> o2) {
 				return o2.getValue().compareTo(o1.getValue());
