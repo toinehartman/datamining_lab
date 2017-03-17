@@ -23,14 +23,24 @@ public class TaxationPageRank extends PageRank {
 	 */
 	@Override
 	public Map<String, Double> calculatePageRank(int iterations) {
+		int n = data.size();
+		Matrix e = new Matrix(n, 1);
+		for (int i = 0; i < n; i++)
+			e.set(i, 1.0);
+
 		// the result
 		HashMap<String, Double> result = new HashMap<String, Double>();
 
 		// the tools
-		Matrix randomSurfer = null;
-		Matrix transitionMatrix = null;
-
-        // FILL IN YOUR CODE HERE
+		Matrix transitionMatrix = constructTransitionMatrix();
+		Matrix randomSurfer = getRandomSurferVector();
+		
+		//Iterative step:
+        for(int i = 0; i < iterations ; i++)
+        	randomSurfer = transitionMatrix
+					.multiply(beta)
+					.dot(randomSurfer)
+					.add(e.multiply((1 - beta) / n));
 
 		// fill the results, match names with PageRank values
 		int count = 0;

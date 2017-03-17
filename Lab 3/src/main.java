@@ -17,8 +17,12 @@ public class main {
 		PageRank pageRank2 = new PageRank();
 		pageRank2.importData("data/example2.txt");
 		System.out.println(pageRank2.calculatePageRank(10));
+		
+		TaxationPageRank pageRankTax2 = new TaxationPageRank(0.8);
+		pageRankTax2.importData("data/example2.txt");
+		System.out.println(pageRankTax2.calculatePageRank(10));
 
-		PageRank flightRank = new PageRank();
+		TaxationPageRank flightRank = new TaxationPageRank(0.8);
 		flightRank.importData("data/flight_data.txt");
 		System.out.println(sortByValues(flightRank.calculatePageRank(10)));
 	}
