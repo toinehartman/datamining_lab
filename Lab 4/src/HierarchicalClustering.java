@@ -80,6 +80,33 @@ public class HierarchicalClustering {
 	 * Performs one update step of the algorithm.
 	 */
 	public void update() {
-		// add code here
+		//if there are more than k clusters:
+		if(clusters.size() > k){
+			Cluster candidateA = null;
+			Cluster candidateB = null;
+			double minDistance = Integer.MAX_VALUE;
+			// check the distance between each pair of clusters
+			for(int i = 0; i < clusters.size(); i++){
+				Cluster a = getCluster(i);
+				for(int j = i + 1; j < clusters.size(); j++){
+					Cluster b = getCluster(j);
+					double distance = a.meanDistanceTo(b);
+					if(distance < minDistance){
+						candidateA = a;
+						candidateB = b;
+						minDistance = distance;
+					}
+					
+				}
+			}
+				
+			//the two clusters with minimum distance will be merged
+			if(candidateA != null){	
+				candidateB.addAll(candidateA);
+				clusters.remove(candidateA);
+				System.out.println(clusters.size());
+				candidateA = null;
+			}
+		}
 	}
 }

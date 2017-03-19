@@ -2,7 +2,9 @@
 public class main {
 	
 	private static void hierarchical() {
-		// add code here
+		int k = 3;
+		new HierarchicalClusteringPlotter(k, "data/cluster_lines.txt");
+		
 	}
 	
 	private static void hierarchicalDigits() {
@@ -22,7 +24,7 @@ public class main {
 	}
 
 	public static void main(String[] args) {
-		//hierarchical();
+		hierarchical();
 		//hierarchicalDigits();
 		//kmeans();
 		//kmeansTuneK();
