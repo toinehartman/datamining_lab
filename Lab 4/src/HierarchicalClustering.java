@@ -80,6 +80,7 @@ public class HierarchicalClustering {
 	 * Performs one update step of the algorithm.
 	 */
 	public void update() {
+		String method = main.METHOD;
 		//if there are more than k clusters:
 		if(clusters.size() > k){
 			Cluster candidateA = null;
@@ -90,13 +91,18 @@ public class HierarchicalClustering {
 				Cluster a = getCluster(i);
 				for(int j = i + 1; j < clusters.size(); j++){
 					Cluster b = getCluster(j);
-					double distance = a.meanDistanceTo(b);
-					if(distance < minDistance){
+					double distance;
+					
+					if(method == "mean"){
+						distance = a.meanDistanceTo(b);
+					} else {
+						distance = a.minDistanceTo(b);
+					}
+					if(distance <= minDistance){
 						candidateA = a;
 						candidateB = b;
 						minDistance = distance;
-					}
-					
+					}					
 				}
 			}
 				
