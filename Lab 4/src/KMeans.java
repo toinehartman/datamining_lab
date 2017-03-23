@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class KMeans {
@@ -71,7 +72,15 @@ public class KMeans {
 	 * Adds a new init point at a random location in the dataset.
 	 */
 	private void addInitPoint() {
-		// add code here
+		int i = Math.min((int)(Math.random() * data.size()), data.size());
+
+		Cluster c = new Cluster();
+		FeatureVector initPoint = data.get(i);
+
+		c.add(initPoint);
+		clusters.add(c);
+
+//		System.out.println("Random init point: " + i);
 	}
 	
 	/**
@@ -102,7 +111,6 @@ public class KMeans {
 		for (FeatureVector v : data) {
 			int cluster_id = closestCentroid(v, centroids);
 			clusters.get(cluster_id).add(v);
-			v.setLabel(cluster_id);
 		}
 	}
 

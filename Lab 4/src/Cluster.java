@@ -37,7 +37,6 @@ public class Cluster extends ArrayList<FeatureVector> {
 	
 	/**
 	 * Constructor.
-	 * @param key
 	 */
 	public Cluster() {
 		changed = true;
@@ -181,7 +180,10 @@ public class Cluster extends ArrayList<FeatureVector> {
 			return Double.NaN;
 		
 		double rss = 0.0;
-		// add code here
+		for (FeatureVector fv : this) {
+			double diff = fv.distance(centroid());
+			rss += diff * diff;
+		}
 		return rss / size();
 	}
 }
