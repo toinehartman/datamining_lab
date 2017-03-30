@@ -88,6 +88,38 @@ public class KMeans {
 	 * If no such clusters exist yet, it will select k random points.
 	 */
 	public void update() {
-		// add code here
+		if (clusters.isEmpty()) {
+			for (int i = 0; i < k; i++)
+				addInitPoint();
+		}
+
+		List<FeatureVector> centroids = new ArrayList<>();
+		for (Cluster c : clusters)
+			centroids.add(c.centroid());
+
+		this.clearClusters();
+
+		for (FeatureVector v : data) {
+			int cluster_id = closestCentroid(v, centroids);
+			clusters.get(cluster_id).add(v);
+			v.setLabel(cluster_id);
+		}
+	}
+
+	private int closestCentroid(FeatureVector v, List<FeatureVector> centroids) {
+		int closest_id = Integer.MAX_VALUE;
+		double closest_dist = Integer.MAX_VALUE;
+
+		for (int i = 0; i < centroids.size(); i++) {
+			FeatureVector centroid = centroids.get(i);
+			double d = v.distance(centroid);
+
+			if (d < closest_dist) {
+				closest_id = i;
+				closest_dist = d;
+			}
+		}
+
+		return closest_id;
 	}
 }
