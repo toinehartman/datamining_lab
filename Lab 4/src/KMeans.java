@@ -111,6 +111,7 @@ public class KMeans {
 		for (FeatureVector v : data) {
 			int cluster_id = closestCentroid(v, centroids);
 			clusters.get(cluster_id).add(v);
+			v.setLabel(cluster_id);
 		}
 	}
 
