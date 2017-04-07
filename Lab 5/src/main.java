@@ -14,7 +14,6 @@ public class main {
 		ap.addBasket("Shop for your show dog grooming and pet supplies");
 		
 		ap.getFrequentSets(3);
-		
 	}
 
 }
